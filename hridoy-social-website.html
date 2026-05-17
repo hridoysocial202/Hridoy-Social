@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hridoy Social - Professional Media Production Services. Photography, Videography, Visual Profiling, Corporate Content & Creative Solutions.">
+    <meta name="keywords" content="photography, videography, media production, content creation, visual profiling, corporate events, South Africa">
+    <meta name="author" content="Hridoy Social">
+    <meta name="theme-color" content="#FFD700">
+    <title>Hridoy Social | Professional Media Production Services</title>
+    
+    <!-- Open Graph SEO -->
+    <meta property="og:title" content="Hridoy Social | Professional Media Production">
+    <meta property="og:description" content="Expert photography, videography, and content creation services for businesses and events.">
+    <meta property="og:type" content="business.business">
+    <meta property="og:url" content="https://hridoysocial.com">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://hridoysocial.com">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gold: #FFD700;
+            --primary-black: #0a0e27;
+            --accent-gold: #FFC107;
+            --dark-gray: #1a1f3a;
+            --light-gray: #f5f7fa;
+            --text-dark: #0a0e27;
+            --text-light: #666;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 8px 16px rgba(0,0,0,0.15);
+            --shadow-lg: 0 16px 32px rgba(0,0,0,0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-gold);
+            color: var(--primary-black);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: var(--primary-black);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--primary-black);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: var(--primary-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: var(--primary-black);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-gold);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-gray) 100%);
+            color: var(--white);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            opacity: 0.05;
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            opacity: 0.03;
+            bottom: -50px;
+            left: -50px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            animation: slideInLeft 0.8s ease;
+        }
+
+        .hero h1 .gold-text {
+            color: var(--primary-gold);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            animation: slideInLeft 0.8s ease 0.2s backwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            animation: slideInLeft 0.8s ease 0.4s backwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #threeDContainer {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: var(--light-gray);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .section-header .gold-accent {
+            color: var(--primary-gold);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid transparent;
+        }
+
+        .service-card:hover {
+            border-top-color: var(--primary-gold);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gold);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-tab {
+            padding: 10px 25px;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .pricing-tab.active {
+            background: var(--primary-gold);
+            color: var(--primary-black);
+            border-color: var(--primary-gold);
+        }
+
+        .pricing-tab:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary-gold);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .price-range {
+            font-size: 1.8rem;
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .price-range small {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .pricing-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Booking Section */
+        .booking {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-black) 0%, var(--dark-gray) 100%);
+            color: var(--white);
+        }
+
+        .booking-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .booking h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .booking-info {
+            margin-bottom: 40px;
+        }
+
+        .booking-info p {
+            color: #ccc;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 2px solid var(--dark-gray);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.95);
+            color: var(--text-dark);
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Team Section */
+        .team {
+            padding: 100px 0;
+            background: var(--light-gray);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .team-member {
+            text-align: center;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .team-member h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .team-member .role {
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .team-member p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .contact-item p {
+            color: var(--text-light);
+        }
+
+        .contact-item a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-black);
+            color: var(--white);
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: var(--primary-gold);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-gold);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,215,0,0.2);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: var(--shadow-lg);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-gold);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-gold);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <div class="logo-icon">HS</div>
+                <span>Hridoy Social</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#booking" class="btn btn-primary" style="margin: 0;">Book Now</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <h1>Elevate Your <span class="gold-text">Visual Story</span></h1>
+                    <p>Professional media production services that transform your vision into compelling visual narratives. Photography, videography, and creative content that captures attention and inspires action.</p>
+                    <div class="hero-cta">
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Start Your Project</button>
+                        <button class="btn btn-secondary" onclick="document.getElementById('servicesSection').scrollIntoView({behavior: 'smooth'})">Explore Services</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div id="threeDContainer"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our <span class="gold-accent">Services</span></h2>
+                <p>Comprehensive media production solutions tailored to your unique needs and vision</p>
+            </div>
+            <div class="services-grid" id="servicesSection">
+                <div class="service-card">
+                    <div class="service-icon">📸</div>
+                    <h3>Professional Photography</h3>
+                    <p>Stunning images for every occasion - from corporate headshots to product photography and event coverage.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎥</div>
+                    <h3>Videography</h3>
+                    <p>Cinematic videos and visual profiling that tell your story with impact and creativity.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Content Creation</h3>
+                    <p>Engaging social media content, reels, and visual narratives optimized for digital platforms.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎬</div>
+                    <h3>Event Production</h3>
+                    <p>Full-scale event coverage for corporate seminars, weddings, parties, and special occasions.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <h3>Corporate Solutions</h3>
+                    <p>Custom visual profiling videos, branding content, and professional documentation for businesses.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Real Estate & Venue</h3>
+                    <p>Professional photography and videography for hotels, venues, properties, and commercial spaces.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transparent <span class="gold-accent">Pricing</span></h2>
+                <p>Flexible packages for every budget and requirement</p>
+            </div>
+
+            <div class="pricing-tabs">
+                <button class="pricing-tab active" onclick="showPricingCategory('photoshoots')">Photography</button>
+                <button class="pricing-tab" onclick="showPricingCategory('videography')">Videography</button>
+                <button class="pricing-tab" onclick="showPricingCategory('events')">Events</button>
+                <button class="pricing-tab" onclick="showPricingCategory('digital')">Digital Services</button>
+            </div>
+
+            <div id="photoshoots" class="pricing-category">
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Corporate Headshots</h3>
+                        <div class="price-range">R500 - R2,000 <small>per person</small></div>
+                        <p>Professional headshots for corporate teams and executives</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Product Photography</h3>
+                        <div class="price-range">R500 - R5,000 <small>per product</small></div>
+                        <p>High-quality product images for e-commerce and marketing</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Social Media Content</h3>
+                        <div class="price-range">R1,000 - R5,000</div>
+                        <p>Individual content packages for social media platforms</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Beauty & Salon</h3>
+                        <div class="price-range">R1,000 - R5,000</div>
+                        <p>Specialized photography for beauty and aesthetic services</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Real Estate</h3>
+                        <div class="price-range">R2,000 - R10,000 <small>per day</small></div>
+                        <p>Professional property and venue photography services</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Car Dealership</h3>
+                        <div class="price-range">R1,000 - R5,000 <small>per vehicle</small></div>
+                        <p>Showcase vehicles with professional photography</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="videography" class="pricing-category" style="display:none;">
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Visual Profiling Video</h3>
+                        <div class="price-range">R5,000 - R20,000</div>
+                        <p>Professional video production for personal or corporate branding</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Social Media Reels</h3>
+                        <div class="price-range">R500 - R2,000 <small>per reel</small></div>
+                        <p>Short, engaging videos optimized for TikTok, Instagram, and YouTube Shorts</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Corporate Events</h3>
+                        <div class="price-range">R5,000 - R20,000</div>
+                        <p>Professional videography for seminars and corporate events</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Vacation Shoots</h3>
+                        <div class="price-range">R2,000 - R10,000</div>
+                        <p>Travel and lifestyle videography for memorable moments</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Celebrity Content</h3>
+                        <div class="price-range">R5,000 - R20,000 <small>per post</small></div>
+                        <p>Premium video content creation for influencers and celebrities</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Beauty Salon Videography</h3>
+                        <div class="price-range">R2,000 - R10,000</div>
+                        <p>Showcase services and transformations with professional video</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="events" class="pricing-category" style="display:none;">
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Weddings</h3>
+                        <div class="price-range">R10,000 - R50,000</div>
+                        <p>Comprehensive wedding photography and videography packages</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Engagement Shoots</h3>
+                        <div class="price-range">R2,000 - R10,000</div>
+                        <p>Romantic couple shoots to celebrate your engagement</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Family Events</h3>
+                        <div class="price-range">R2,000 - R10,000</div>
+                        <p>Capture precious family moments at celebrations and gatherings</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Corporate Seminars</h3>
+                        <div class="price-range">R5,000 - R20,000</div>
+                        <p>Full event coverage for conferences and business events</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Getaway/Home Shoots</h3>
+                        <div class="price-range">R1,000 - R5,000</div>
+                        <p>Intimate couple photoshoots at home or getaway locations</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Custom Event Package</h3>
+                        <div class="price-range">Contact for Quote</div>
+                        <p>Tailored solutions for unique events and special occasions</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Get Quote</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="digital" class="pricing-category" style="display:none;">
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Social Media Creation</h3>
+                        <div class="price-range">R1,300 - R1,400</div>
+                        <p>Setup and optimization for Facebook, Instagram, TikTok and more</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Social Media Management</h3>
+                        <div class="price-range">R3,000 - R9,000 <small>monthly</small></div>
+                        <p>Comprehensive management and content strategy</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Website Design</h3>
+                        <div class="price-range">R7,000 - R15,000</div>
+                        <p>Professional website development for your brand</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>SEO Optimization</h3>
+                        <div class="price-range">R3,500 - R9,000</div>
+                        <p>Get ranked on Google with professional SEO services</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Website Maintenance</h3>
+                        <div class="price-range">R1,300 - R1,800 <small>monthly</small></div>
+                        <p>Ongoing support and maintenance for your website</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Book Now</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Custom Package</h3>
+                        <div class="price-range">Contact for Quote</div>
+                        <p>Tailored digital solutions for your specific needs</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('bookingModal').classList.add('show')">Get Quote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <div class="booking-container">
+                <div class="booking-info">
+                    <h2>Ready to Transform Your Vision?</h2>
+                    <p>Let's discuss your project and create something extraordinary together. Our team is ready to bring your ideas to life with professional photography, videography, and content creation services.</p>
+                    <div style="margin-top: 40px;">
+                        <h3 style="margin-bottom: 20px;">Quick Booking</h3>
+                        <div style="background: rgba(255,215,0,0.1); padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary-gold);">
+                            <p style="margin: 10px 0;"><strong>📞 Phone:</strong> +27 72 036 3764</p>
+                            <p style="margin: 10px 0;"><strong>📧 Email:</strong> info@hridoysocial.com</p>
+                            <p style="margin: 10px 0;"><strong>⏰ Response Time:</strong> Within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="booking-form" id="bookingForm" onsubmit="handleBooking(event)">
+                    <div id="formMessage" class="success-message"></div>
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Type *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service...</option>
+                            <option value="Photography">Professional Photography</option>
+                            <option value="Videography">Videography</option>
+                            <option value="Event Coverage">Event Coverage</option>
+                            <option value="Content Creation">Content Creation</option>
+                            <option value="Digital Services">Digital Services</option>
+                            <option value="Custom Package">Custom Package</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Preferred Date *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Details *</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Booking Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our <span class="gold-accent">Team</span></h2>
+                <p>Experienced professionals dedicated to bringing your vision to life</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">👨‍💼</div>
+                    <h3>Hridoy</h3>
+                    <div class="role">Creative Director & Founder</div>
+                    <p>Visionary leader with expertise in photography, videography, and content strategy. Passionate about creating compelling visual narratives.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">📸</div>
+                    <h3>Professional Team</h3>
+                    <div class="role">Photographers & Cinematographers</div>
+                    <p>Skilled professionals with years of experience in capturing perfect moments and producing high-quality visual content.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">🎨</div>
+                    <h3>Creative Team</h3>
+                    <div class="role">Editors & Designers</div>
+                    <p>Expert post-production specialists who transform raw footage into stunning final products with professional editing and design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In <span class="gold-accent">Touch</span></h2>
+                <p>Have questions? We're here to help and ready to discuss your project.</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-item-icon">📞</div>
+                    <h3>Phone</h3>
+                    <p><a href="tel:+27720363764">+27 72 036 3764</a></p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">📧</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@hridoysocial.com">info@hridoysocial.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>South Africa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Hridoy Social</h4>
+                    <p>Professional media production services specializing in photography, videography, and creative content creation.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Photography</a></li>
+                        <li><a href="#services">Videography</a></li>
+                        <li><a href="#services">Event Coverage</a></li>
+                        <li><a href="#services">Content Creation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#booking">Book Now</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">TikTok</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Hridoy Social. All rights reserved. | Professional Media Production Services</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('bookingModal').classList.remove('show')">&times;</button>
+            <h2 style="margin-bottom: 30px;">Start Your Project</h2>
+            <form id="modalForm" onsubmit="handleBooking(event)">
+                <div id="modalMessage" class="success-message"></div>
+                <div class="form-group">
+                    <label for="modalName">Full Name *</label>
+                    <input type="text" id="modalName" name="name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="modalEmail">Email *</label>
+                        <input type="email" id="modalEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modalPhone">Phone *</label>
+                        <input type="tel" id="modalPhone" name="phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="modalService">Service *</label>
+                    <select id="modalService" name="service" required>
+                        <option value="">Select service...</option>
+                        <option value="Photography">Professional Photography</option>
+                        <option value="Videography">Videography</option>
+                        <option value="Event Coverage">Event Coverage</option>
+                        <option value="Content Creation">Content Creation</option>
+                        <option value="Digital Services">Digital Services</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modalMessage">Message</label>
+                    <textarea id="modalMessage" name="message" placeholder="Tell us about your project..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Three.js 3D visualization
+        function initThreeJS() {
+            const container = document.getElementById('threeDContainer');
+            if (!container) return;
+
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+            renderer.setSize(width, height);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+
+            // Create 3D objects
+            const geometry1 = new THREE.SphereGeometry(1, 32, 32);
+            const material1 = new THREE.MeshPhongMaterial({ color: 0xFFD700 });
+            const sphere1 = new THREE.Mesh(geometry1, material1);
+            sphere1.position.x = -2;
+            scene.add(sphere1);
+
+            const geometry2 = new THREE.DodecahedronGeometry(1.5, 0);
+            const material2 = new THREE.MeshPhongMaterial({ 
+                color: 0xFFD700,
+                wireframe: false,
+                emissive: 0x666600
+            });
+            const dodecahedron = new THREE.Mesh(geometry2, material2);
+            dodecahedron.position.x = 2;
+            scene.add(dodecahedron);
+
+            // Lighting
+            const light1 = new THREE.PointLight(0xFFD700, 1);
+            light1.position.set(5, 5, 5);
+            scene.add(light1);
+
+            const light2 = new THREE.PointLight(0xffffff, 0.5);
+            light2.position.set(-5, -5, 5);
+            scene.add(light2);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+            scene.add(ambientLight);
+
+            camera.position.z = 5;
+
+            // Animation loop
+            let animationId;
+            function animate() {
+                animationId = requestAnimationFrame(animate);
+
+                sphere1.rotation.x += 0.003;
+                sphere1.rotation.y += 0.005;
+
+                dodecahedron.rotation.x += 0.004;
+                dodecahedron.rotation.y += 0.006;
+                dodecahedron.rotation.z += 0.003;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (!container.parentElement) return;
+                
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            });
+        }
+
+        // Pricing tabs
+        function showPricingCategory(category) {
+            // Hide all
+            document.querySelectorAll('.pricing-category').forEach(el => {
+                el.style.display = 'none';
+            });
+
+            // Remove active class
+            document.querySelectorAll('.pricing-tab').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Show selected
+            document.getElementById(category).style.display = 'block';
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Form handling
+        function handleBooking(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            // Validate
+            if (!data.name || !data.email || !data.phone || !data.service) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // In production, send to backend
+            console.log('Booking Data:', data);
+
+            // Show success message
+            const messageEl = form.querySelector('#formMessage') || form.querySelector('#modalMessage');
+            if (messageEl) {
+                messageEl.innerHTML = '✓ Thank you! We\'ve received your booking request. We\'ll contact you within 24 hours.';
+                messageEl.classList.add('show');
+            }
+
+            // Reset form
+            form.reset();
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                if (messageEl) {
+                    messageEl.classList.remove('show');
+                }
+            }, 5000);
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('bookingModal');
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initThreeJS();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
